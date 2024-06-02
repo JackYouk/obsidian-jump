@@ -3,13 +3,14 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { Environment, OrbitControls, Float, Text3D, Center, useMatcapTexture } from "@react-three/drei"
 import { LayerMaterial, Base, Depth, Noise } from 'lamina'
 import * as THREE from 'three'
+import JumperGame from "./JumperGame";
 
 function NameComponent() {
-  const [matcap] = useMatcapTexture('6D1616_E6CDBA_DE2B24_230F0F')
+  const [matcap] = useMatcapTexture('04CC77_0CF7CA_04E9A7_04AB54')
   return (
     <Float>
     <Text3D scale={1.2} rotation={[0, -0.4, 0]} font={'./Kanadaka_Regular.json'} castShadow receiveShadow>
-      Marj
+      Zaza
       <meshMatcapMaterial matcap={matcap} />
     </Text3D>
     </Float>
@@ -41,7 +42,7 @@ function HeartComponent({ onClick, position, scale }) {
   }), []);  
 
   const geometry = useMemo(() => new THREE.ExtrudeGeometry(heartShape, extrudeSettings), [heartShape]);
-  const [matcap] = useMatcapTexture('F77777_FBE1E1_FAB2B2_FBC4C4');
+  const [matcap] = useMatcapTexture('04CC77_0CF7CA_04E9A7_04AB54');
 
   return (
     <mesh geometry={geometry} position={position} rotation={[Math.PI, 0, 0]} scale={scale} onClick={onClick}>
@@ -123,7 +124,7 @@ function BackgroundComponent() {
       <mesh scale={100}>
         <sphereGeometry args={[1, 64, 64]} />
         <LayerMaterial side={THREE.BackSide}>
-          <Base color="#FF69B4" alpha={1} mode="normal" />
+          <Base color="#51E996" alpha={1} mode="normal" />
           <Depth colorA="#ffffff" colorB="#8B0000" alpha={0.4} mode="normal" near={0} far={300} origin={[100, 100, 100]} />
           <Noise mapping="local" type="cell" scale={0.6} mode="softlight" />
         </LayerMaterial>
@@ -137,16 +138,19 @@ export default function App() {
 
   return (
     <>
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, window.innerWidth < 700 ? 7 : 5] }} style={{ position: 'absolute', width: '100%', height: '100dvh' }}>
-        <OrbitControls minPolarAngle={Math.PI / 1.8} maxPolarAngle={Math.PI / 1.8} />
+      <div className="layout">
+        <h1>Obsidian's Blog</h1>
+        <h3>Written by Marj</h3>
+        <p>My name is obsidian. I am a cat.<br/>Meow. ฅ^•ﻌ•^ฅ</p>
+      </div>
+      <JumperGame />
+      {/* <Canvas dpr={[1, 2]} camera={{ position: [0, 0, window.innerWidth < 700 ? 7 : 5] }} style={{ position: 'absolute', bottom: 0, width: '100%', height: '50dvh' }}>
         <pointLight position={[0, 2, 2]} intensity={2} />
         <ambientLight intensity={1} />
         <Center>
-          <NameComponent />
+
         </Center>
-        <HeartsComponent />
-        <BackgroundComponent />
-      </Canvas>
+      </Canvas> */}
     </>
   )
 }
